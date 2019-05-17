@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <RootNamespace>ProvidenceTweeterBot</RootNamespace>
+    <RootNamespace>ProvidenceTwitterBot</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,5 +17,10 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProvidenceTwitterBot.Abstractions\ProvidenceTwitterBot.Abstractions.csproj" />
+    <ProjectReference Include="..\ProvidenceTwitterBot.Config\ProvidenceTwitterBot.Config.csproj" />
   </ItemGroup>
 </Project>

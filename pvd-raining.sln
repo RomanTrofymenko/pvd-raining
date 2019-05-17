@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProvidenceTwitterBot.Config", "ProvidenceTwitterBot.Config\ProvidenceTwitterBot.Config.csproj", "{85D02BEB-BDF7-4467-BAA6-2AD1C55AFF42}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProvidenceTwitterBot.Abstractions", "ProvidenceTwitterBot.Abstractions\ProvidenceTwitterBot.Abstractions.csproj", "{1AC9E32A-93CD-4295-A0FF-37BC6DA08047}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{85D02BEB-BDF7-4467-BAA6-2AD1C55AFF42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85D02BEB-BDF7-4467-BAA6-2AD1C55AFF42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85D02BEB-BDF7-4467-BAA6-2AD1C55AFF42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AC9E32A-93CD-4295-A0FF-37BC6DA08047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AC9E32A-93CD-4295-A0FF-37BC6DA08047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AC9E32A-93CD-4295-A0FF-37BC6DA08047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AC9E32A-93CD-4295-A0FF-37BC6DA08047}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

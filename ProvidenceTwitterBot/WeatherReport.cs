@@ -9,7 +9,7 @@ using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace ProvidenceTweeterBot
+namespace ProvidenceTwitterBot
 {
 
     public partial class WeatherReport
@@ -143,12 +143,12 @@ namespace ProvidenceTweeterBot
 
     public partial class WeatherReport
     {
-        public static WeatherReport FromJson(string json) => JsonConvert.DeserializeObject<WeatherReport>(json, ProvidenceTweeterBot.Converter.Settings);
+        public static WeatherReport FromJson(string json) => JsonConvert.DeserializeObject<WeatherReport>(json, Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this WeatherReport self) => JsonConvert.SerializeObject(self, ProvidenceTweeterBot.Converter.Settings);
+        public static string ToJson(this WeatherReport self) => JsonConvert.SerializeObject(self, Converter.Settings);
     }
 
     internal static class Converter

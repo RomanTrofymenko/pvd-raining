@@ -1,10 +1,11 @@
 using Microsoft.Extensions.Options;
+using ProvidenceTwitterBot;
 using ProvidenceTwitterBot.Config;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace ProvidenceTweeterBot
+namespace ProvidenceTwitterBot
 {
     public class WeatherChecker : IWeatherChecker
     {

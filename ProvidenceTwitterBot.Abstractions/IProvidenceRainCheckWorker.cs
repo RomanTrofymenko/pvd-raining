@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace ProvidenceTweeterBot
+namespace ProvidenceTwitterBot
 {
     public interface IProvidenceRainCheckWorker
     {
