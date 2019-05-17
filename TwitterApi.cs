@@ -11,11 +11,13 @@ namespace ProvidenceTweeterBot
 {
     public class TwitterApi : ITwitterApi
     {
-        readonly string consumerKey, accessToken;
-        readonly HMACSHA1 sigHasher;
+        private readonly IHttpClientFactory httpClientFactory;
+        private readonly string consumerKey, accessToken;
+        private readonly HMACSHA1 sigHasher;
 
-        public TwitterApi(IOptions<ProvidenceRainCheckWorkerConfig> config)
+        public TwitterApi(IOptions<ProvidenceRainCheckWorkerConfig> config, IHttpClientFactory httpClientFactory)
         {
+            this.httpClientFactory = httpClientFactory;
             consumerKey = config.Value.ConsumerKey;
             accessToken = config.Value.AccessToken;
 
@@ -78,11 +80,11 @@ namespace ProvidenceTweeterBot
 
         private async Task<string> SendRequest(string fullUrl, string oAuthHeader, FormUrlEncodedContent formData)
         {
-            using (var http = new HttpClient())
+            using (var httpClient = httpClientFactory.CreateClient())
             {
-                http.DefaultRequestHeaders.Add("Authorization", oAuthHeader);
+                httpClient.DefaultRequestHeaders.Add("Authorization", oAuthHeader);
 
-                var httpResp = await http.PostAsync(fullUrl, formData);
+                var httpResp = await httpClient.PostAsync(fullUrl, formData);
                 var respBody = await httpResp.Content.ReadAsStringAsync();
 
                 return respBody;

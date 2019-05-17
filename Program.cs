@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ProvidenceTweeterBot
@@ -26,14 +25,5 @@ namespace ProvidenceTweeterBot
             var worker = serviceProvider.GetRequiredService<IProvidenceRainCheckWorker>();
             await worker.Execute();
         }
-    }
-
-    public class ProvidenceRainCheckWorkerConfig
-    {
-        public string ConsumerKey { get; set; }
-        public string ConsumerSecret { get; set; }
-        public string AccessToken { get; set; }
-        public string AccessTokenSecret { get; set; }
-        public string WeatherAppId { get; set; }
     }
 }
