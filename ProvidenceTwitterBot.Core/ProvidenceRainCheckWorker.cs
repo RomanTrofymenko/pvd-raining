@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,16 +29,36 @@ namespace ProvidenceTwitterBot
                 if (isRaining.HasValue)
                 {
                     logger.Log(LogLevel.Information, "Weather data fetched");
-                    var message = GetRandomMessage(isRaining.Value);
+                    
                     logger.Log(LogLevel.Information, "Posting status update");
-                    var result = await twitterApi.Tweet(message);
-                    logger.Log(LogLevel.Information, "Status update posted", result);
+                    var success = await PostStatusUpdate(isRaining.Value, Enumerable.Empty<string>());
+                    if(success)
+                        logger.Log(LogLevel.Information, "Status update posted");
+                    else
+                        logger.Log(LogLevel.Warning, "Ran out of available messages");
                 }
                 Thread.Sleep(TimeSpan.FromHours(6));
             }
         }
 
-        private static string GetRandomMessage(bool isRaining)
+        private async Task<bool> PostStatusUpdate(bool isRaining, IEnumerable<string> rejected)
+        {
+            var message = GetRandomMessage(isRaining, rejected);
+
+            if(message == null)
+                return false;
+
+            var result = await twitterApi.Tweet(message);
+
+            var errors = TweetError.FromJson(result);
+
+            if (errors != null && errors.Errors.Any() && errors.Errors[0].Code == 187)
+                return await PostStatusUpdate(isRaining, rejected.Append(message));
+
+            return false;
+        }
+
+        private static string GetRandomMessage(bool isRaining, IEnumerable<string> rejected)
         {
             string[] options;
 
@@ -45,9 +67,17 @@ namespace ProvidenceTwitterBot
             else
                 options = new string[] { "No... Weird.", "Not yet.", "No, but it will soon." };
 
-            return GetRandomString(options);
+            if (options.All(o => rejected.Contains(o)))
+                return null;
+
+            string candidate;
+            do
+                candidate = GetRandomString(options);
+            while (rejected.Contains(candidate));
+
+            return candidate;
         }
 
-        private static string GetRandomString(string[] options) => options[new Random().Next(options.Length - 1)];
+        private static string GetRandomString(string[] options) => options[new Random().Next(options.Length)];
     }
 }

@@ -11,8 +11,7 @@ using Newtonsoft.Json.Converters;
 
 namespace ProvidenceTwitterBot
 {
-
-    public partial class WeatherReport
+    public class WeatherReport
     {
         [JsonProperty("coord")]
         public Coord Coord { get; set; }
@@ -52,6 +51,17 @@ namespace ProvidenceTwitterBot
 
         [JsonProperty("cod")]
         public long Cod { get; set; }
+
+        private static readonly JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
+            DateParseHandling = DateParseHandling.None,
+            Converters =
+            {
+                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
+            },
+        };
+        public static WeatherReport FromJson(string json) => JsonConvert.DeserializeObject<WeatherReport>(json, settings);
     }
 
     public class Clouds
@@ -139,28 +149,5 @@ namespace ProvidenceTwitterBot
 
         [JsonProperty("gust")]
         public double Gust { get; set; }
-    }
-
-    public partial class WeatherReport
-    {
-        public static WeatherReport FromJson(string json) => JsonConvert.DeserializeObject<WeatherReport>(json, Converter.Settings);
-    }
-
-    public static class Serialize
-    {
-        public static string ToJson(this WeatherReport self) => JsonConvert.SerializeObject(self, Converter.Settings);
-    }
-
-    internal static class Converter
-    {
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
-        {
-            MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
-            DateParseHandling = DateParseHandling.None,
-            Converters =
-            {
-                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
-            },
-        };
     }
 }
