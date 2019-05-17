@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ProvidenceTwitterBot.Config;
 
 namespace ProvidenceTweeterBot
 {

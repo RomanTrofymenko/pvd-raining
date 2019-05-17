@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Options;
+using ProvidenceTwitterBot.Config;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;

@@ -1,4 +1,4 @@
-﻿namespace ProvidenceTweeterBot
+﻿namespace ProvidenceTwitterBot.Config
 {
     public class ProvidenceRainCheckWorkerConfig
     {
