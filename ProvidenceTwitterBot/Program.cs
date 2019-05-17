@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using ProvidenceTwitterBot.Config;
 
 namespace ProvidenceTwitterBot
@@ -13,12 +14,13 @@ namespace ProvidenceTwitterBot
                 .AddEnvironmentVariables();
             
             var configurationRoot = configBuilder.Build();
-            
+
             var serviceProvider = new ServiceCollection()
                 .AddHttpClient()
                 .AddScoped<IWeatherChecker, WeatherChecker>()
                 .AddScoped<ITwitterApi, TwitterApi>()
                 .AddScoped<IProvidenceRainCheckWorker, ProvidenceRainCheckWorker>()
+                .AddLogging(loggingBuilder => loggingBuilder.AddConsole())
                 .Configure<ProvidenceRainCheckWorkerConfig>(configurationRoot)
                 .AddOptions()
                 .BuildServiceProvider();
