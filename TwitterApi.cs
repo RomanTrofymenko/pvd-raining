@@ -16,10 +16,10 @@ namespace ProvidenceTweeterBot
 
         public TwitterApi(IOptions<ProvidenceRainCheckWorkerConfig> config)
         {
-            consumerKey = config.Value.TwitterApiConfig.ConsumerKey;
-            accessToken = config.Value.TwitterApiConfig.AccessToken;
+            consumerKey = config.Value.ConsumerKey;
+            accessToken = config.Value.AccessToken;
 
-            sigHasher = new HMACSHA1(new ASCIIEncoding().GetBytes(string.Format("{0}&{1}", config.Value.TwitterApiConfig.ConsumerSecret, config.Value.TwitterApiConfig.AccessTokenSecret)));
+            sigHasher = new HMACSHA1(new ASCIIEncoding().GetBytes(string.Format("{0}&{1}", config.Value.ConsumerSecret, config.Value.AccessTokenSecret)));
         }
 
         public async Task<string> Tweet(string text)

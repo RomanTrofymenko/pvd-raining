@@ -26,7 +26,7 @@ namespace ProvidenceTweeterBot
                     var message = GetRandomMessage(isRaining.Value);
                     var result = await twitterApi.Tweet(message);
                 }
-                Thread.Sleep(TimeSpan.FromHours(2));
+                Thread.Sleep(TimeSpan.FromHours(6));
             }
         }
 
