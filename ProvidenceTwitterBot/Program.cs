@@ -20,7 +20,12 @@ namespace ProvidenceTwitterBot
                 .AddScoped<IWeatherChecker, WeatherChecker>()
                 .AddScoped<ITwitterApi, TwitterApi>()
                 .AddScoped<IProvidenceRainCheckWorker, ProvidenceRainCheckWorker>()
-                .AddLogging(loggingBuilder => loggingBuilder.AddConsole())
+                .AddLogging(loggingBuilder =>
+                {
+                    loggingBuilder.AddConsole();
+                    loggingBuilder.AddDebug();
+                    loggingBuilder.AddEventSourceLogger();
+                })
                 .Configure<ProvidenceRainCheckWorkerConfig>(configurationRoot)
                 .AddOptions()
                 .BuildServiceProvider();
