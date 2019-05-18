@@ -12,13 +12,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		Dockerfile = Dockerfile
 		README.md = README.md
+		taskrun.yml = taskrun.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProvidenceTwitterBot.Config", "ProvidenceTwitterBot.Config\ProvidenceTwitterBot.Config.csproj", "{85D02BEB-BDF7-4467-BAA6-2AD1C55AFF42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProvidenceTwitterBot.Config", "ProvidenceTwitterBot.Config\ProvidenceTwitterBot.Config.csproj", "{85D02BEB-BDF7-4467-BAA6-2AD1C55AFF42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProvidenceTwitterBot.Abstractions", "ProvidenceTwitterBot.Abstractions\ProvidenceTwitterBot.Abstractions.csproj", "{1AC9E32A-93CD-4295-A0FF-37BC6DA08047}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProvidenceTwitterBot.Abstractions", "ProvidenceTwitterBot.Abstractions\ProvidenceTwitterBot.Abstractions.csproj", "{1AC9E32A-93CD-4295-A0FF-37BC6DA08047}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProvidenceTwitterBot.Core", "ProvidenceTwitterBot.Core\ProvidenceTwitterBot.Core.csproj", "{67019719-BCE7-4B30-9FDF-618A61314C9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProvidenceTwitterBot.Core", "ProvidenceTwitterBot.Core\ProvidenceTwitterBot.Core.csproj", "{67019719-BCE7-4B30-9FDF-618A61314C9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
