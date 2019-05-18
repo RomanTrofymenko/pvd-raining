@@ -1,7 +1,8 @@
 version: v1.0.0
 steps:
 # Build target image
-- build: -t {{.Run.Registry}}/pvdraining:{{.Run.ID}} -f Dockerfile .
+- build:
+   -t {{.Run.Registry}}/pvdraining -f Dockerfile .
 # Push image
 - push:
   - {{.Run.Registry}}/pvdraining:{{.Run.ID}}
