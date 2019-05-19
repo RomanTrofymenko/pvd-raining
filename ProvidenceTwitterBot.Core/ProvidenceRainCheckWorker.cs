@@ -59,7 +59,7 @@ namespace ProvidenceTwitterBot
             if (errors.Errors != null && errors.Errors.Any() && errors.Errors[0].Code == 187)
                 return await PostStatusUpdate(isRaining, rejected.Append(message));
 
-            return false;
+            return true;
         }
 
         private string GetRandomMessage(bool isRaining, IEnumerable<string> rejected)
