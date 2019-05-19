@@ -9,6 +9,8 @@ namespace ProvidenceTwitterBot
 {
     public class ProvidenceRainCheckWorker : IProvidenceRainCheckWorker
     {
+        private readonly string[] rainingMessages = new string[] { "Yes.", "Definitely yes.", "Of course.", "Of course it is.", "You bet.", "Of course it is, what did you think?", "Yep.", "Yes. Yes, it is raining in Providence. Huge surprise." };
+        private readonly string[] notRainingMessages = new string[] { "No... Weird.", "Not yet.", "No, but it will soon.", "As surprising as it is - no, it is not.", "You probably won't believe me, but it actually isn't.", "No. I know, right?", "It's not. Something's clearly wrong here." };
         private readonly IWeatherChecker weatherChecker;
         private readonly ITwitterApi twitterApi;
         private readonly ILogger logger;
@@ -32,7 +34,7 @@ namespace ProvidenceTwitterBot
                     
                     logger.Log(LogLevel.Information, "Posting status update");
                     var success = await PostStatusUpdate(isRaining.Value, Enumerable.Empty<string>());
-                    if(success)
+                    if (success)
                         logger.Log(LogLevel.Information, "Status update posted");
                     else
                         logger.Log(LogLevel.Warning, "Ran out of available messages");
@@ -45,10 +47,12 @@ namespace ProvidenceTwitterBot
         {
             var message = GetRandomMessage(isRaining, rejected);
 
-            if(message == null)
+            if (message == null)
                 return false;
 
             var result = await twitterApi.Tweet(message);
+
+            logger.Log(LogLevel.Information, $"Attempt to post message \"{message}\" recieved following response :\n {result}");
 
             var errors = TweetError.FromJson(result);
 
@@ -58,14 +62,14 @@ namespace ProvidenceTwitterBot
             return false;
         }
 
-        private static string GetRandomMessage(bool isRaining, IEnumerable<string> rejected)
+        private string GetRandomMessage(bool isRaining, IEnumerable<string> rejected)
         {
             string[] options;
 
             if (isRaining)
-                options = new string[] { "Yes.", "Definitely yes.", "Of course.", "Of course it is.", "Of course it fucking is.", "You bet." };
+                options = rainingMessages;
             else
-                options = new string[] { "No... Weird.", "Not yet.", "No, but it will soon." };
+                options = notRainingMessages;
 
             if (options.All(o => rejected.Contains(o)))
                 return null;
@@ -78,6 +82,6 @@ namespace ProvidenceTwitterBot
             return candidate;
         }
 
-        private static string GetRandomString(string[] options) => options[new Random().Next(options.Length)];
+        private string GetRandomString(string[] options) => options[new Random().Next(options.Length)];
     }
 }
