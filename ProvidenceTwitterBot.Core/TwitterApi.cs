@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -84,7 +85,7 @@ namespace ProvidenceTwitterBot
             using (var httpClient = httpClientFactory.CreateClient())
             {
                 httpClient.DefaultRequestHeaders.Add("Authorization", oAuthHeader);
-                httpClient.DefaultRequestHeaders.CacheControl.NoCache = true;
+                httpClient.DefaultRequestHeaders.CacheControl = new CacheControlHeaderValue() { NoCache = true };
                 var httpResp = await httpClient.PostAsync(fullUrl, formData);
                 var respBody = await httpResp.Content.ReadAsStringAsync();
 
