@@ -84,7 +84,7 @@ namespace ProvidenceTwitterBot
             using (var httpClient = httpClientFactory.CreateClient())
             {
                 httpClient.DefaultRequestHeaders.Add("Authorization", oAuthHeader);
-
+                httpClient.DefaultRequestHeaders.CacheControl.NoCache = true;
                 var httpResp = await httpClient.PostAsync(fullUrl, formData);
                 var respBody = await httpResp.Content.ReadAsStringAsync();
 

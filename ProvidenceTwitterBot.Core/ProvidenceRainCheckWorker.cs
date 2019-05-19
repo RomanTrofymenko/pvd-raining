@@ -10,7 +10,7 @@ namespace ProvidenceTwitterBot
     public class ProvidenceRainCheckWorker : IProvidenceRainCheckWorker
     {
         private readonly string[] rainingMessages = new string[] { "Yes.", "Definitely yes.", "Of course.", "Of course it is.", "You bet.", "Of course it is, what did you think?", "Yep.", "Yes. Yes, it is raining in Providence. Huge surprise." };
-        private readonly string[] notRainingMessages = new string[] { "No... Weird.", "Not yet.", "No, but it will soon.", "As surprising as it is - no, it is not.", "You probably won't believe me, but it actually isn't.", "No. I know, right?", "It's not. Something's clearly wrong here." };
+        private readonly string[] notRainingMessages = new string[] { "Not yet.", "No, but it will soon.", "As surprising as it is - no, it is not.", "No... Weird.", "You probably won't believe me, but it actually isn't.", "No. I know, right?", "It's not. Something's clearly wrong here." };
         private readonly IWeatherChecker weatherChecker;
         private readonly ITwitterApi twitterApi;
         private readonly ILogger logger;
@@ -56,7 +56,7 @@ namespace ProvidenceTwitterBot
 
             var errors = TweetError.FromJson(result);
 
-            if (errors != null && errors.Errors.Any() && errors.Errors[0].Code == 187)
+            if (errors.Errors != null && errors.Errors.Any() && errors.Errors[0].Code == 187)
                 return await PostStatusUpdate(isRaining, rejected.Append(message));
 
             return false;
